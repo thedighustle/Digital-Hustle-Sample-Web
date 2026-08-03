@@ -249,15 +249,28 @@ function AudienceCard({
   body,
   features,
   cta,
+  image,
+  alt,
 }: {
   eyebrow: string;
   header: string;
   body: string;
   features: string[];
   cta: string;
+  image: string;
+  alt: string;
 }) {
   return (
-    <article className="group relative flex flex-col rounded-3xl border border-border bg-card p-8 shadow-card transition-transform hover:-translate-y-1">
+    <article className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-transform hover:-translate-y-1">
+      <img
+        src={image}
+        alt={alt}
+        loading="lazy"
+        width={1024}
+        height={768}
+        className="h-52 w-full object-cover sm:h-60"
+      />
+      <div className="flex flex-1 flex-col p-8">
       <span className="text-xs font-bold uppercase tracking-[0.16em] text-gradient-accent">
         {eyebrow}
       </span>
