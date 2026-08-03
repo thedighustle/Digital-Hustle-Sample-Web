@@ -16,6 +16,11 @@ import {
 } from "lucide-react";
 import heroDevices from "@/assets/hero-devices.jpg";
 import logoMark from "@/assets/logo.png";
+import creatorsImg from "@/assets/creators.jpg";
+import businessImg from "@/assets/business.jpg";
+import solutionSingle from "@/assets/solution-single.jpg";
+import solutionMulti from "@/assets/solution-multi.jpg";
+import solutionHub from "@/assets/solution-hub.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -81,18 +86,24 @@ const offerings = [
     tag: "Option A",
     title: "Single-Page Websites",
     body: "Stop overcomplicating. Fast-loading, high-impact landing pages designed for high conversion.",
+    image: solutionSingle,
+    alt: "Single-page website mockup on a laptop with navy and cyan interface",
   },
   {
     icon: Layers,
     tag: "Option B",
     title: "Multi-Page Websites",
     body: "Comprehensive web platforms built for established local service providers expanding their online presence.",
+    image: solutionMulti,
+    alt: "Layered browser windows showing a multi-page business website",
   },
   {
     icon: GraduationCap,
     tag: "Option C",
     title: "Custom Digital Products & Hubs",
     body: "Complete digital ecosystems including video courses, gated communities, and recurring subscription models.",
+    image: solutionHub,
+    alt: "Online course membership hub on desktop and mobile",
   },
 ];
 
@@ -238,15 +249,28 @@ function AudienceCard({
   body,
   features,
   cta,
+  image,
+  alt,
 }: {
   eyebrow: string;
   header: string;
   body: string;
   features: string[];
   cta: string;
+  image: string;
+  alt: string;
 }) {
   return (
-    <article className="group relative flex flex-col rounded-3xl border border-border bg-card p-8 shadow-card transition-transform hover:-translate-y-1">
+    <article className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-transform hover:-translate-y-1">
+      <img
+        src={image}
+        alt={alt}
+        loading="lazy"
+        width={1024}
+        height={768}
+        className="h-52 w-full object-cover sm:h-60"
+      />
+      <div className="flex flex-1 flex-col p-8">
       <span className="text-xs font-bold uppercase tracking-[0.16em] text-gradient-accent">
         {eyebrow}
       </span>
@@ -268,6 +292,7 @@ function AudienceCard({
       >
         {cta} <ArrowRight className="h-4 w-4" />
       </a>
+      </div>
     </article>
   );
 }
@@ -289,6 +314,8 @@ function Audience() {
             "Subscriber Loyalty Hubs",
           ]}
           cta="Build Your Digital Product"
+          image={creatorsImg}
+          alt="Creator recording an online course at a desk with a course dashboard on screen"
         />
         <AudienceCard
           eyebrow="For Service-Based Businesses"
@@ -300,6 +327,8 @@ function Audience() {
             "Lead Generation & Booking Integration",
           ]}
           cta="Build Your Website"
+          image={businessImg}
+          alt="Service business owner showing a modern business website on a tablet"
         />
       </div>
     </section>
@@ -352,20 +381,30 @@ function Solutions() {
         {offerings.map((o) => (
           <article
             key={o.title}
-            className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-card transition-transform hover:-translate-y-1"
+            className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-transform hover:-translate-y-1"
           >
             <div
               aria-hidden
-              className="absolute inset-x-0 top-0 h-1 bg-gradient-accent opacity-0 transition-opacity group-hover:opacity-100"
+              className="absolute inset-x-0 top-0 z-10 h-1 bg-gradient-accent opacity-0 transition-opacity group-hover:opacity-100"
             />
-            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent text-accent-foreground">
-              <o.icon className="h-6 w-6" strokeWidth={2.1} />
-            </span>
-            <span className="mt-6 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
-              {o.tag}
-            </span>
-            <h3 className="mt-2 text-xl font-extrabold tracking-tight text-navy">{o.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{o.body}</p>
+            <img
+              src={o.image}
+              alt={o.alt}
+              loading="lazy"
+              width={1024}
+              height={768}
+              className="h-44 w-full object-cover"
+            />
+            <div className="flex flex-1 flex-col p-8">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent text-accent-foreground">
+                <o.icon className="h-6 w-6" strokeWidth={2.1} />
+              </span>
+              <span className="mt-6 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                {o.tag}
+              </span>
+              <h3 className="mt-2 text-xl font-extrabold tracking-tight text-navy">{o.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{o.body}</p>
+            </div>
           </article>
         ))}
       </div>
