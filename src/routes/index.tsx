@@ -16,6 +16,11 @@ import {
 } from "lucide-react";
 import heroDevices from "@/assets/hero-devices.jpg";
 import logoMark from "@/assets/logo.png";
+import creatorsImg from "@/assets/creators.jpg";
+import businessImg from "@/assets/business.jpg";
+import solutionSingle from "@/assets/solution-single.jpg";
+import solutionMulti from "@/assets/solution-multi.jpg";
+import solutionHub from "@/assets/solution-hub.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
