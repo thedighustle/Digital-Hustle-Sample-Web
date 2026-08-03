@@ -86,18 +86,24 @@ const offerings = [
     tag: "Option A",
     title: "Single-Page Websites",
     body: "Stop overcomplicating. Fast-loading, high-impact landing pages designed for high conversion.",
+    image: solutionSingle,
+    alt: "Single-page website mockup on a laptop with navy and cyan interface",
   },
   {
     icon: Layers,
     tag: "Option B",
     title: "Multi-Page Websites",
     body: "Comprehensive web platforms built for established local service providers expanding their online presence.",
+    image: solutionMulti,
+    alt: "Layered browser windows showing a multi-page business website",
   },
   {
     icon: GraduationCap,
     tag: "Option C",
     title: "Custom Digital Products & Hubs",
     body: "Complete digital ecosystems including video courses, gated communities, and recurring subscription models.",
+    image: solutionHub,
+    alt: "Online course membership hub on desktop and mobile",
   },
 ];
 
