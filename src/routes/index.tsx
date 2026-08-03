@@ -99,15 +99,20 @@ const offerings = [
 function Logo() {
   return (
     <a href="#top" className="flex min-w-0 items-center gap-2.5">
-      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-accent text-primary-foreground">
-        <CircuitBoard className="h-5 w-5" strokeWidth={2.2} />
-      </span>
+      <img
+        src={logoMark}
+        alt="The Digital Hustle logo"
+        width={512}
+        height={512}
+        className="h-9 w-9 shrink-0 object-contain"
+      />
       <span className="truncate text-base font-extrabold tracking-tight text-navy">
         The Digital Hustle
       </span>
     </a>
   );
 }
+
 
 function Nav() {
   const [open, setOpen] = useState(false);
