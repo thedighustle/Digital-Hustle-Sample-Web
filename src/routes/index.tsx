@@ -292,6 +292,7 @@ function AudienceCard({
       >
         {cta} <ArrowRight className="h-4 w-4" />
       </a>
+      </div>
     </article>
   );
 }
