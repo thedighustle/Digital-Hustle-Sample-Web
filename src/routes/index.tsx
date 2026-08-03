@@ -314,6 +314,8 @@ function Audience() {
             "Subscriber Loyalty Hubs",
           ]}
           cta="Build Your Digital Product"
+          image={creatorsImg}
+          alt="Creator recording an online course at a desk with a course dashboard on screen"
         />
         <AudienceCard
           eyebrow="For Service-Based Businesses"
@@ -325,6 +327,8 @@ function Audience() {
             "Lead Generation & Booking Integration",
           ]}
           cta="Build Your Website"
+          image={businessImg}
+          alt="Service business owner showing a modern business website on a tablet"
         />
       </div>
     </section>
