@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   ArrowRight,
-  CircuitBoard,
   Menu,
   X,
   Compass,
@@ -16,6 +15,7 @@ import {
   Check,
 } from "lucide-react";
 import heroDevices from "@/assets/hero-devices.jpg";
+import logoMark from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
