@@ -381,20 +381,30 @@ function Solutions() {
         {offerings.map((o) => (
           <article
             key={o.title}
-            className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-card transition-transform hover:-translate-y-1"
+            className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-transform hover:-translate-y-1"
           >
             <div
               aria-hidden
-              className="absolute inset-x-0 top-0 h-1 bg-gradient-accent opacity-0 transition-opacity group-hover:opacity-100"
+              className="absolute inset-x-0 top-0 z-10 h-1 bg-gradient-accent opacity-0 transition-opacity group-hover:opacity-100"
             />
-            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent text-accent-foreground">
-              <o.icon className="h-6 w-6" strokeWidth={2.1} />
-            </span>
-            <span className="mt-6 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
-              {o.tag}
-            </span>
-            <h3 className="mt-2 text-xl font-extrabold tracking-tight text-navy">{o.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{o.body}</p>
+            <img
+              src={o.image}
+              alt={o.alt}
+              loading="lazy"
+              width={1024}
+              height={768}
+              className="h-44 w-full object-cover"
+            />
+            <div className="flex flex-1 flex-col p-8">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent text-accent-foreground">
+                <o.icon className="h-6 w-6" strokeWidth={2.1} />
+              </span>
+              <span className="mt-6 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                {o.tag}
+              </span>
+              <h3 className="mt-2 text-xl font-extrabold tracking-tight text-navy">{o.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{o.body}</p>
+            </div>
           </article>
         ))}
       </div>
