@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ForBusinessesRouteImport } from './routes/for-businesses'
 import { Route as ForCreatorsRouteImport } from './routes/for-creators'
 import { Route as ProcessRouteImport } from './routes/process'
@@ -18,6 +19,11 @@ import { Route as ServicesRouteImport } from './routes/services'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForBusinessesRoute = ForBusinessesRouteImport.update({
@@ -43,6 +49,7 @@ const ServicesRoute = ServicesRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/for-businesses': typeof ForBusinessesRoute
   '/for-creators': typeof ForCreatorsRoute
   '/process': typeof ProcessRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/for-businesses': typeof ForBusinessesRoute
   '/for-creators': typeof ForCreatorsRoute
   '/process': typeof ProcessRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/for-businesses': typeof ForBusinessesRoute
   '/for-creators': typeof ForCreatorsRoute
   '/process': typeof ProcessRoute
@@ -66,12 +75,24 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/for-businesses' | '/for-creators' | '/process' | '/services'
+    | '/'
+    | '/contact'
+    | '/for-businesses'
+    | '/for-creators'
+    | '/process'
+    | '/services'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/for-businesses' | '/for-creators' | '/process' | '/services'
+  to:
+    | '/'
+    | '/contact'
+    | '/for-businesses'
+    | '/for-creators'
+    | '/process'
+    | '/services'
   id:
     | '__root__'
     | '/'
+    | '/contact'
     | '/for-businesses'
     | '/for-creators'
     | '/process'
@@ -80,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
   ForBusinessesRoute: typeof ForBusinessesRoute
   ForCreatorsRoute: typeof ForCreatorsRoute
   ProcessRoute: typeof ProcessRoute
@@ -93,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/for-businesses': {
@@ -128,6 +157,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
   ForBusinessesRoute: ForBusinessesRoute,
   ForCreatorsRoute: ForCreatorsRoute,
   ProcessRoute: ProcessRoute,
