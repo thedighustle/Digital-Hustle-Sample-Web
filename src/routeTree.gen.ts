@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ForBusinessesRouteImport } from './routes/for-businesses'
 import { Route as ForCreatorsRouteImport } from './routes/for-creators'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -37,6 +38,11 @@ const ForCreatorsRoute = ForCreatorsRouteImport.update({
   path: '/for-creators',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProcessRoute = ProcessRouteImport.update({
   id: '/process',
   path: '/process',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/for-businesses': typeof ForBusinessesRoute
   '/for-creators': typeof ForCreatorsRoute
+  '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/for-businesses': typeof ForBusinessesRoute
   '/for-creators': typeof ForCreatorsRoute
+  '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/for-businesses': typeof ForBusinessesRoute
   '/for-creators': typeof ForCreatorsRoute
+  '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/for-businesses'
     | '/for-creators'
+    | '/privacy'
     | '/process'
     | '/services'
     | '/terms'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/for-businesses'
     | '/for-creators'
+    | '/privacy'
     | '/process'
     | '/services'
     | '/terms'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/for-businesses'
     | '/for-creators'
+    | '/privacy'
     | '/process'
     | '/services'
     | '/terms'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ForBusinessesRoute: typeof ForBusinessesRoute
   ForCreatorsRoute: typeof ForCreatorsRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProcessRoute: typeof ProcessRoute
   ServicesRoute: typeof ServicesRoute
   TermsRoute: typeof TermsRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForCreatorsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/process': {
       id: '/process'
       path: '/process'
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ForBusinessesRoute: ForBusinessesRoute,
   ForCreatorsRoute: ForCreatorsRoute,
+  PrivacyRoute: PrivacyRoute,
   ProcessRoute: ProcessRoute,
   ServicesRoute: ServicesRoute,
   TermsRoute: TermsRoute,
