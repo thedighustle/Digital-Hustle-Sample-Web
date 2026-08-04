@@ -50,7 +50,8 @@ function ServiceNotFound() {
 }
 
 function ServiceDetailPage() {
-  const { service } = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  const service = serviceDetails[slug] as ServiceDetail;
 
   return (
     <>
