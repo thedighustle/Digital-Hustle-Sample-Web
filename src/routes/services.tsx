@@ -67,6 +67,13 @@ function ServicesPage() {
                 </span>
                 <h2 className="mt-2 text-xl font-extrabold tracking-tight text-navy">{o.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{o.body}</p>
+                <Link
+                  to="/service/$slug"
+                  params={{ slug: o.slug }}
+                  className="mt-6 inline-flex items-center justify-center gap-2 self-start rounded-xl bg-gradient-accent px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+                >
+                  Learn More <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             </article>
           ))}
