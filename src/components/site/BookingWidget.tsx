@@ -102,9 +102,10 @@ export function BookingWidget() {
         </div>
       </div>
 
-      <div className="mt-6">
+      <div id="booking-times" className="mt-6 scroll-mt-24">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          2. Choose a time
+          2. Choose a time{" "}
+          <span className="normal-case tracking-normal">(times shown in Mountain Time)</span>
         </p>
         {slotsQuery.isPending ? (
           <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
@@ -125,7 +126,18 @@ export function BookingWidget() {
               <button
                 key={s.start}
                 type="button"
-                onClick={() => setSlot(s)}
+                onClick={() => {
+                  setSlot(s);
+                  setSlotError(false);
+                }}
+                className={`rounded-xl border px-3 py-2.5 text-sm font-semibold transition-colors ${
+                  slot?.start === s.start
+                    ? "border-transparent bg-gradient-accent text-primary-foreground"
+                    : "border-border bg-background text-navy hover:border-cyan-deep"
+                }`}
+              >
+                {s.label}
+
                 className={`rounded-xl border px-3 py-2.5 text-sm font-semibold transition-colors ${
                   slot?.start === s.start
                     ? "border-transparent bg-gradient-accent text-primary-foreground"
