@@ -34,8 +34,10 @@ export function BookingWidget() {
   const days = nextWeekdays(10);
   const [date, setDate] = useState(days[0]!.iso);
   const [slot, setSlot] = useState<{ start: string; end: string; label: string } | null>(null);
+  const [slotError, setSlotError] = useState(false);
   const fetchSlots = useServerFn(getSlots);
   const book = useServerFn(bookSlot);
+
 
   const slotsQuery = useQuery({
     queryKey: ["slots", date],
