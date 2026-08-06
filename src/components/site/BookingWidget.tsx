@@ -234,9 +234,10 @@ export function BookingWidget() {
 
         <button
           type="submit"
-          disabled={!slot || booking.isPending}
+          disabled={booking.isPending}
           className="inline-flex items-center gap-2 rounded-xl bg-gradient-accent px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
         >
+
           {booking.isPending ? (
             <>
               Booking… <Loader2 className="h-4 w-4 animate-spin" />
