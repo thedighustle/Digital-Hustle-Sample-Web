@@ -26,95 +26,19 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
-const goals = [
-  "Digital course or membership hub",
-  "Single-page website",
-  "Multi-page website",
-  "Not sure yet — need guidance",
-];
-
 function ContactPage() {
-  const [sent, setSent] = useState(false);
-
   return (
     <>
       <PageHero
         eyebrow="Contact"
         title="Let's build your digital infrastructure."
-        subtitle="Share a few details and we'll come to the call with a plan, not a pitch. Most replies go out within one business day."
+        subtitle="Pick a live slot from our calendar and we'll come to the call with a plan, not a pitch."
       />
 
       <section className="mx-auto max-w-7xl px-5 py-20">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
-          <div className="rounded-3xl border border-border bg-card p-8 shadow-card sm:p-10">
-            {sent ? (
-              <div className="py-10 text-center">
-                <h2 className="text-2xl font-extrabold tracking-tight text-navy">
-                  Request received.
-                </h2>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  We'll be in touch within one business day to schedule your strategy call.
-                </p>
-              </div>
-            ) : (
-              <form
-                className="space-y-5"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSent(true);
-                }}
-              >
-                <h2 className="text-2xl font-extrabold tracking-tight text-navy">
-                  Schedule a strategy call
-                </h2>
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <label className="block text-sm font-semibold text-navy">
-                    Name
-                    <input
-                      required
-                      name="name"
-                      className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm font-normal text-navy outline-none focus:ring-2 focus:ring-ring"
-                    />
-                  </label>
-                  <label className="block text-sm font-semibold text-navy">
-                    Email
-                    <input
-                      required
-                      type="email"
-                      name="email"
-                      className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm font-normal text-navy outline-none focus:ring-2 focus:ring-ring"
-                    />
-                  </label>
-                </div>
-                <label className="block text-sm font-semibold text-navy">
-                  What are you building?
-                  <select
-                    name="goal"
-                    className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm font-normal text-navy outline-none focus:ring-2 focus:ring-ring"
-                  >
-                    {goals.map((g) => (
-                      <option key={g}>{g}</option>
-                    ))}
-                  </select>
-                </label>
-                <label className="block text-sm font-semibold text-navy">
-                  Tell us more
-                  <textarea
-                    name="message"
-                    rows={5}
-                    placeholder="Your audience size, current website, timeline…"
-                    className="mt-2 w-full resize-y rounded-xl border border-input bg-background px-4 py-3 text-sm font-normal text-navy outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
-                  />
-                </label>
-                <button
-                  type="submit"
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-accent px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-                >
-                  Schedule A Strategy Call <ArrowRight className="h-4 w-4" />
-                </button>
-              </form>
-            )}
-          </div>
+          <BookingWidget />
+
 
           <div className="space-y-5">
             {[
