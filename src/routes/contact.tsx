@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Mail, Clock, MessageSquare, ArrowRight } from "lucide-react";
+import { Mail, Clock, MessageSquare } from "lucide-react";
 import { Newsletter } from "@/components/site/Newsletter";
 import { PageHero } from "@/components/site/Sections";
+import { BookingWidget } from "@/components/site/BookingWidget";
+
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
