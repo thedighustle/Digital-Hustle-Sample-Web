@@ -31,20 +31,27 @@ function nextWeekdays(count: number) {
 }
 
 export function BookingWidget() {
-  const days = nextWeekdays(10);
-  const [date, setDate] = useState(days[0]!.iso);
+  const [days, setDays] = useState<ReturnType<typeof nextWeekdays>>([]);
+  const [date, setDate] = useState("");
   const [slot, setSlot] = useState<{ start: string; end: string; label: string } | null>(null);
   const [slotError, setSlotError] = useState(false);
   const fetchSlots = useServerFn(getSlots);
   const book = useServerFn(bookSlot);
 
+  useEffect(() => {
+    const d = nextWeekdays(10);
+    setDays(d);
+    setDate((prev) => prev || d[0]!.iso);
+  }, []);
 
   const slotsQuery = useQuery({
     queryKey: ["slots", date],
     queryFn: () => fetchSlots({ data: { date } }),
     retry: false,
     refetchOnWindowFocus: false,
+    enabled: date !== "",
   });
+
 
 
   const booking = useMutation({
