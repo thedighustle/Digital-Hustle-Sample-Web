@@ -138,13 +138,6 @@ export function BookingWidget() {
               >
                 {s.label}
 
-                className={`rounded-xl border px-3 py-2.5 text-sm font-semibold transition-colors ${
-                  slot?.start === s.start
-                    ? "border-transparent bg-gradient-accent text-primary-foreground"
-                    : "border-border bg-background text-navy hover:border-cyan-deep"
-                }`}
-              >
-                {s.label}
               </button>
             ))}
           </div>
