@@ -244,9 +244,10 @@ export function BookingWidget() {
             </>
           ) : (
             <>
-              {slot ? `Confirm ${slot.label}` : "Select a time first"}{" "}
+              {slot ? `Confirm ${slot.label}` : "Pick a time above"}{" "}
               <ArrowRight className="h-4 w-4" />
             </>
+
           )}
         </button>
       </form>
