@@ -41,7 +41,9 @@ export function BookingWidget() {
     queryKey: ["slots", date],
     queryFn: () => fetchSlots({ data: { date } }),
     retry: false,
+    refetchOnWindowFocus: false,
   });
+
 
   const booking = useMutation({
     mutationFn: (vars: { name: string; email: string; goal: string; message: string }) =>
