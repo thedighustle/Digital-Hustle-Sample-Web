@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, CalendarDays, Loader2 } from "lucide-react";
@@ -31,17 +31,28 @@ function nextWeekdays(count: number) {
 }
 
 export function BookingWidget() {
-  const days = nextWeekdays(10);
-  const [date, setDate] = useState(days[0]!.iso);
+  const [days, setDays] = useState<ReturnType<typeof nextWeekdays>>([]);
+  const [date, setDate] = useState("");
   const [slot, setSlot] = useState<{ start: string; end: string; label: string } | null>(null);
+  const [slotError, setSlotError] = useState(false);
   const fetchSlots = useServerFn(getSlots);
   const book = useServerFn(bookSlot);
+
+  useEffect(() => {
+    const d = nextWeekdays(10);
+    setDays(d);
+    setDate((prev) => prev || d[0]!.iso);
+  }, []);
 
   const slotsQuery = useQuery({
     queryKey: ["slots", date],
     queryFn: () => fetchSlots({ data: { date } }),
     retry: false,
+    refetchOnWindowFocus: false,
+    enabled: date !== "",
   });
+
+
 
   const booking = useMutation({
     mutationFn: (vars: { name: string; email: string; goal: string; message: string }) =>
@@ -98,9 +109,10 @@ export function BookingWidget() {
         </div>
       </div>
 
-      <div className="mt-6">
+      <div id="booking-times" className="mt-6 scroll-mt-24">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          2. Choose a time
+          2. Choose a time{" "}
+          <span className="normal-case tracking-normal">(times shown in Mountain Time)</span>
         </p>
         {slotsQuery.isPending ? (
           <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
@@ -121,7 +133,10 @@ export function BookingWidget() {
               <button
                 key={s.start}
                 type="button"
-                onClick={() => setSlot(s)}
+                onClick={() => {
+                  setSlot(s);
+                  setSlotError(false);
+                }}
                 className={`rounded-xl border px-3 py-2.5 text-sm font-semibold transition-colors ${
                   slot?.start === s.start
                     ? "border-transparent bg-gradient-accent text-primary-foreground"
@@ -129,6 +144,7 @@ export function BookingWidget() {
                 }`}
               >
                 {s.label}
+
               </button>
             ))}
           </div>
@@ -139,6 +155,11 @@ export function BookingWidget() {
         className="mt-7 space-y-5 border-t border-border pt-7"
         onSubmit={(e) => {
           e.preventDefault();
+          if (!slot) {
+            setSlotError(true);
+            document.getElementById("booking-times")?.scrollIntoView({ behavior: "smooth" });
+            return;
+          }
           const fd = new FormData(e.currentTarget);
           booking.mutate({
             name: String(fd.get("name") ?? ""),
@@ -151,6 +172,27 @@ export function BookingWidget() {
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           3. Your details
         </p>
+        <p className="text-sm text-muted-foreground">
+          {slot ? (
+            <>
+              Selected:{" "}
+              <span className="font-semibold text-navy">
+                {new Date(slot.start).toLocaleDateString("en-US", {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric",
+                  timeZone: "America/Edmonton",
+                })}{" "}
+                at {slot.label} MT
+              </span>
+            </>
+          ) : (
+            <span className={slotError ? "font-semibold text-destructive" : undefined}>
+              Pick a time above to continue.
+            </span>
+          )}
+        </p>
+
         <div className="grid gap-5 sm:grid-cols-2">
           <label className="block text-sm font-semibold text-navy">
             Name
@@ -199,18 +241,20 @@ export function BookingWidget() {
 
         <button
           type="submit"
-          disabled={!slot || booking.isPending}
+          disabled={booking.isPending}
           className="inline-flex items-center gap-2 rounded-xl bg-gradient-accent px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
         >
+
           {booking.isPending ? (
             <>
               Booking… <Loader2 className="h-4 w-4 animate-spin" />
             </>
           ) : (
             <>
-              {slot ? `Confirm ${slot.label}` : "Select a time first"}{" "}
+              {slot ? `Confirm ${slot.label}` : "Pick a time above"}{" "}
               <ArrowRight className="h-4 w-4" />
             </>
+
           )}
         </button>
       </form>
