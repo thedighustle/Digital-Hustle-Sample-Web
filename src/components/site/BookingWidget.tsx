@@ -148,6 +148,11 @@ export function BookingWidget() {
         className="mt-7 space-y-5 border-t border-border pt-7"
         onSubmit={(e) => {
           e.preventDefault();
+          if (!slot) {
+            setSlotError(true);
+            document.getElementById("booking-times")?.scrollIntoView({ behavior: "smooth" });
+            return;
+          }
           const fd = new FormData(e.currentTarget);
           booking.mutate({
             name: String(fd.get("name") ?? ""),
@@ -160,6 +165,27 @@ export function BookingWidget() {
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           3. Your details
         </p>
+        <p className="text-sm text-muted-foreground">
+          {slot ? (
+            <>
+              Selected:{" "}
+              <span className="font-semibold text-navy">
+                {new Date(slot.start).toLocaleDateString("en-US", {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric",
+                  timeZone: "America/Edmonton",
+                })}{" "}
+                at {slot.label} MT
+              </span>
+            </>
+          ) : (
+            <span className={slotError ? "font-semibold text-destructive" : undefined}>
+              Pick a time above to continue.
+            </span>
+          )}
+        </p>
+
         <div className="grid gap-5 sm:grid-cols-2">
           <label className="block text-sm font-semibold text-navy">
             Name
