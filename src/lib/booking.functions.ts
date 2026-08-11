@@ -22,7 +22,7 @@ export const bookSlot = createServerFn({ method: "POST" })
     }) => {
       const name = (data?.name ?? "").trim();
       const email = (data?.email ?? "").trim();
-      if (name.length < 2 || name.length > 120) throw new Error("Please enter your name.");
+      if (name.length < 1 || name.length > 120) throw new Error("Please enter your name.");
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 200)
         throw new Error("Please enter a valid email.");
       if (!data?.start || !data?.end) throw new Error("Please pick a time slot.");
