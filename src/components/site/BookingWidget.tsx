@@ -161,9 +161,12 @@ export function BookingWidget() {
             return;
           }
           const fd = new FormData(e.currentTarget);
+          const name = String(fd.get("name") ?? "").trim();
+          const email = String(fd.get("email") ?? "").trim();
+          if (!name || !email) return;
           booking.mutate({
-            name: String(fd.get("name") ?? ""),
-            email: String(fd.get("email") ?? ""),
+            name,
+            email,
             goal: String(fd.get("goal") ?? ""),
             message: String(fd.get("message") ?? ""),
           });
