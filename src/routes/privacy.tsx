@@ -27,7 +27,7 @@ const sections = [
   { h: "How we use it", p: "To respond to enquiries, deliver project work and — if you opt in — send occasional growth playbooks. We never sell your data." },
   { h: "Analytics", p: "We use privacy-respecting analytics to understand which pages are useful. This data is aggregated and not used to identify individuals." },
   { h: "Third-party tools", p: "Email, payment and scheduling providers may process your data on our behalf under their own privacy policies." },
-  { h: "Your choices", p: "You can unsubscribe from emails at any time, or request access to and deletion of your data by contacting hello@thedigitalhustle.co." },
+  { h: "Your choices", p: "You can unsubscribe from emails at any time, or request access to and deletion of your data by contacting rikhi.ktik@gmail.com." },
 ];
 
 function PrivacyPage() {
