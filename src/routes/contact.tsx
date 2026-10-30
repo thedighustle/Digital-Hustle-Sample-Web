@@ -42,7 +42,7 @@ function ContactPage() {
 
           <div className="space-y-5">
             {[
-              { icon: Mail, title: "Email us", body: "hello@thedigitalhustle.co" },
+              { icon: Mail, title: "Email us", body: "rikhi.ktik@gmail.com" },
               { icon: Clock, title: "Response time", body: "Within one business day" },
               { icon: MessageSquare, title: "Call length", body: "30 minutes, no obligation" },
             ].map((c) => (

@@ -120,7 +120,7 @@ export function BookingWidget() {
           </p>
         ) : slotsQuery.isError ? (
           <p className="mt-3 text-sm text-muted-foreground">
-            We couldn't load availability right now. Email us at hello@thedigitalhustle.co and we'll
+            We couldn't load availability right now. Email us at rikhi.ktik@gmail.com and we'll
             find a time.
           </p>
         ) : slotsQuery.data.slots.length === 0 ? (

@@ -1,6 +1,7 @@
 const GATEWAY = "https://connector-gateway.lovable.dev/google_calendar/calendar/v3";
 
 export const BOOKING_TIME_ZONE = "America/Edmonton";
+export const OWNER_EMAIL = "rikhi.ktik@gmail.com";
 const SLOT_MINUTES = 30;
 const DAY_START_HOUR = 9;
 const DAY_END_HOUR = 17;
@@ -142,7 +143,10 @@ export async function createBooking(input: {
       description: details,
       start: { dateTime: start.toISOString(), timeZone: BOOKING_TIME_ZONE },
       end: { dateTime: end.toISOString(), timeZone: BOOKING_TIME_ZONE },
-      attendees: [{ email: input.email, displayName: input.name }],
+      attendees: [
+        { email: OWNER_EMAIL, displayName: "The Digital Hustle" },
+        { email: input.email, displayName: input.name },
+      ],
       reminders: { useDefault: true },
     }),
   })) as { id?: string; htmlLink?: string };
